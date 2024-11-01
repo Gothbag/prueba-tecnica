@@ -8,6 +8,10 @@ class PricingService {
     const { name, quantity, duration } = purchase;
     const parsedQuantity = +quantity;
 
+    if (parsedQuantity < 1 || parsedQuantity > 100) {
+      throw new Error('Incorrect number');
+    }
+
     switch (name) {
       case 'color':
         return this.calculateColorPrice(parsedQuantity, duration);

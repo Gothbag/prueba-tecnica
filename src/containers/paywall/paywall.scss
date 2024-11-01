@@ -11,6 +11,24 @@
   }
 }
 
+.quantity-input {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  width: 250px;
+
+  input {
+    width: 100px;
+  }
+}
+
+.error-message {
+  color: #e63946;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
 .paywall-buttons {
   display: flex;
   justify-content: center;

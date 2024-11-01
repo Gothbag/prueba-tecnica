@@ -1,5 +1,7 @@
 import React from "react";
+
 import { Duration } from "../../../../types";
+import { isCorrectQuantity } from "../../validations";
 
 interface Props {
   calculatedPrice: number | null;
@@ -11,7 +13,7 @@ interface Props {
   quantity: number;
 }
 
-const ProductOptions = ({ 
+const ProductOptions = ({
   calculatedPrice,
   duration,
   handleCalculatePrice,
@@ -20,17 +22,22 @@ const ProductOptions = ({
   handleSetQuantity,
   quantity,
 }: Props) => {
+  const hasError = !isCorrectQuantity(quantity);
+
   return (
     <div className="paywall-options">
       <label>Quantity:</label>
-      <input
-        type="number"
-        disabled={duration === Duration.Monthly}
-        min="1"
-        max="100"
-        value={quantity}
-        onChange={handleSetQuantity}
-      />
+      <div className="quantity-input">
+        <input
+          type="number"
+          disabled={duration === Duration.Monthly}
+          min="1"
+          max="100"
+          value={quantity}
+          onChange={handleSetQuantity}
+        />
+        {hasError && <span className="error-message">Quantity must be between 1 and 100.</span>}
+      </div>
 
       <label>Duration:</label>
       <select value={duration} onChange={handleSetDuration}>
@@ -38,9 +45,15 @@ const ProductOptions = ({
         <option value="yearly">Yearly</option>
       </select>
 
-      <button className="purchase-button" onClick={handleCalculatePrice}>Calculate Price</button>
+      <button
+        className="purchase-button"
+        disabled={hasError}
+        onClick={handleCalculatePrice}
+      >
+        Calculate Price
+      </button>
 
-      {calculatedPrice !== null && (
+      {calculatedPrice !== null && !hasError && (
         <div>
           <p>Total Price: {calculatedPrice.toFixed(2)}€</p>
           <button className="purchase-button" onClick={handlePurchase}>Confirm Purchase</button>

@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Duration, Product } from "../../../types";
+import { isCorrectQuantity } from "../validations";
 
 const usePaywall = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -29,7 +30,7 @@ const usePaywall = () => {
     }, []);
 
   const handleCalculatePrice = useCallback(async () => {
-    if (!selectedProduct) return;
+    if (!selectedProduct || !isCorrectQuantity(quantity)) return;
 
     const queryParams = new URLSearchParams({
       name: selectedProduct,
@@ -57,7 +58,7 @@ const usePaywall = () => {
   }, [duration, quantity])
 
   const handlePurchase = useCallback(async () => {
-    if (!selectedProduct || calculatedPrice === null) return;
+    if (!selectedProduct || !isCorrectQuantity(quantity)) return;
 
     try {
       const response = await fetch('http://localhost:3000/api/purchase', {
