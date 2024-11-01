@@ -3,6 +3,7 @@ import React from 'react';
 import './paywall.scss';
 import usePaywall from './hooks/use-paywall';
 import ProductOptions from './components/product-options';
+import { Product } from '../../types';
 
 const Paywall: React.FC = () => {
   const {
@@ -25,19 +26,19 @@ const Paywall: React.FC = () => {
 
       <div className="paywall-buttons">
         <button
-          className={`paywall-button ${selectedProduct === 'color' ? 'active' : ''}`}
+          className={`paywall-button ${selectedProduct === Product.Color ? 'active' : ''}`}
           onClick={handleSelectColor}
         >
           Color Subscription
         </button>
         <button
-          className={`paywall-button ${selectedProduct === 'insider' ? 'active' : ''}`}
+          className={`paywall-button ${selectedProduct === Product.Insider ? 'active' : ''}`}
           onClick={handleSelectInsider}
         >
           Insider Subscription
         </button>
         <button
-          className={`paywall-button ${selectedProduct === 'both' ? 'active' : ''}`}
+          className={`paywall-button ${selectedProduct === Product.Both ? 'active' : ''}`}
           onClick={handleSelectBoth}
         >
           Both Products Subscription
