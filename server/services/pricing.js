@@ -6,21 +6,16 @@ class PricingService {
 
   calculatePrice(purchase) {
     const { name, quantity, duration } = purchase;
-    let totalPrice = 0;
+    const parsedQuantity = +quantity;
 
     switch (name) {
       case 'color':
-        totalPrice = this.calculateColorPrice(quantity, duration);
-        break;
+        return this.calculateColorPrice(parsedQuantity, duration);
       case 'insider':
-        totalPrice = this.calculateInsiderPrice(quantity, duration);
-        break;
+        return this.calculateInsiderPrice(parsedQuantity, duration);
       case 'both':
-        totalPrice = this.calculateBothProductsPrice(quantity, duration);
-        break;
+        return this.calculateBothProductsPrice(parsedQuantity, duration);
     }
-
-    return totalPrice;
   }
 
   calculateColorPrice(quantity, duration) {
@@ -37,13 +32,13 @@ class PricingService {
     return quantity * PricingService.INSIDER_YEARLY_PRICE;
   }
 
-  calculateBothProductsPrice(quantity) {
-    const colorPrice = quantity === 1 ? PricingService.COLOR_MONTHLY_PRICE : PricingService.COLOR_YEARLY_PRICE;
-    const insiderPrice = quantity === 1 ? PricingService.INSIDER_MONTHLY_PRICE : PricingService.INSIDER_YEARLY_PRICE;
+  calculateBothProductsPrice(quantity, duration) {
+    const colorPrice = this.calculateColorPrice(quantity, duration);
+    const insiderPrice = this.calculateInsiderPrice(quantity, duration);
     const total = colorPrice + insiderPrice;
-
+    
     const discount = quantity === 1 ? 0.1 : 0.2;
-    return total * quantity * (1 - discount);
+    return total * (1 - discount);
   }
 }
 

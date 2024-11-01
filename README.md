@@ -1,3 +1,29 @@
+# Colors
+
+In order to set up this project, first install the dependencies.
+In the main folder, run:
+```
+npm install
+```
+Within the **server** folder, run:
+```
+npm install
+```
+
+and then in the main folder run
+
+```
+npm run build
+```
+
+and in order to run it, execute while in the main folder:
+```
+npm run dev
+Within the **server** folder, run:
+```
+npm start
+```
+
 # Technical Interview
 
 ## Instructions

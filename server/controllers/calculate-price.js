@@ -1,14 +1,14 @@
 const PricingService = require('../services/pricing');
 
-class PurchaseController {
+class CalculatePriceController {
   pricingService;
 
   constructor() {
     this.pricingService = new PricingService();
   }
 
-  purchase = (req, res) => {
-    const { name, quantity, duration } = req.body;
+  calculateTotalPrice = (req, res) => {
+    const { name, quantity, duration } = req.query;
 
     if (!name || !quantity || !duration) {
       res.status(400).json({ error: 'Missing required fields' });
@@ -17,11 +17,11 @@ class PurchaseController {
 
     try {
       const totalPrice = this.pricingService.calculatePrice({ name, quantity, duration });
-      res.status(201).json({ totalPrice });
+      res.json({ totalPrice });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to make purchase' });
+      res.status(500).json({ error: 'Failed to calculate price' });
     }
   };
 }
 
-module.exports = new PurchaseController();
+module.exports = new CalculatePriceController();

@@ -16,16 +16,16 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-}
 
-.paywall-button:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
+  &:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+  }
 
-.paywall-button.active {
-  background-color: #d0d0ff;
-  border-color: #a0a0ff;
+  &.active {
+    background-color: #d0d0ff;
+    border-color: #a0a0ff;
+  }
 }
 
 .paywall-options {

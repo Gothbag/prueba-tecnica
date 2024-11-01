@@ -1,36 +1,23 @@
-import React, { useState } from 'react';
-import { Product, ProductOption } from '../../types';
+import React from 'react';
 
 import './paywall.scss';
+import usePaywall from './hooks/use-paywall';
+import ProductOptions from './components/product-options';
 
 const Paywall: React.FC = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Product>('color');
-  const [quantity, setQuantity] = useState<number>(1);
-  const [duration, setDuration] = useState<'monthly' | 'yearly'>('monthly');
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  const handleProductSelect = (product: Product) => {
-    setSelectedProduct(product);
-    setQuantity(1);
-    setDuration('monthly'); // Default to monthly for each selection
-  };
-
-  const handlePurchase = () => {
-    if (!selectedProduct) return;
-
-    const order: ProductOption = {
-      name: selectedProduct,
-      quantity,
-      duration,
-    };
-
-    fetch('http://localhost:3000/api/purchase', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(order),
-    }).then((res) => res.json())
-      .then((data) => setTotalPrice(data.totalPrice));
-  };
+  const {
+    calculatedPrice,
+    duration,
+    handleCalculatePrice,
+    handlePurchase,
+    handleSelectBoth,
+    handleSelectColor,
+    handleSetDuration,
+    handleSelectInsider,
+    handleSetQuantity,
+    quantity,
+    selectedProduct,
+  } = usePaywall();
 
   return (
     <div className="paywall">
@@ -39,46 +26,33 @@ const Paywall: React.FC = () => {
       <div className="paywall-buttons">
         <button
           className={`paywall-button ${selectedProduct === 'color' ? 'active' : ''}`}
-          onClick={() => handleProductSelect('color')}
+          onClick={handleSelectColor}
         >
           Color Subscription
         </button>
         <button
           className={`paywall-button ${selectedProduct === 'insider' ? 'active' : ''}`}
-          onClick={() => handleProductSelect('insider')}
+          onClick={handleSelectInsider}
         >
           Insider Subscription
         </button>
         <button
           className={`paywall-button ${selectedProduct === 'both' ? 'active' : ''}`}
-          onClick={() => handleProductSelect('both')}
+          onClick={handleSelectBoth}
         >
           Both Products Subscription
         </button>
       </div>
 
-      {selectedProduct && (
-        <div className="paywall-options">
-          <label>Quantity:</label>
-          <input
-            type="number"
-            min="1"
-            max="100"
-            value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
-          />
-
-          <label>Duration:</label>
-          <select value={duration} onChange={(e) => setDuration(e.target.value as 'monthly' | 'yearly')}>
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
-          </select>
-
-          <button onClick={handlePurchase}>
-            Purchase for {totalPrice.toFixed(2)}€
-          </button>
-        </div>
-      )}
+      {selectedProduct && (<ProductOptions
+        calculatedPrice={calculatedPrice}
+        duration={duration}
+        handleCalculatePrice={handleCalculatePrice}
+        handlePurchase={handlePurchase}
+        handleSetDuration={handleSetDuration}
+        handleSetQuantity={handleSetQuantity}
+        quantity={quantity}
+      />)}
     </div>
   );
 };
