@@ -38,12 +38,12 @@ const ProductOptions = ({
         <option value="yearly">Yearly</option>
       </select>
 
-      <button onClick={handleCalculatePrice}>Calculate Price</button>
+      <button className="purchase-button" onClick={handleCalculatePrice}>Calculate Price</button>
 
       {calculatedPrice !== null && (
         <div>
           <p>Total Price: {calculatedPrice.toFixed(2)}€</p>
-          <button onClick={handlePurchase}>Confirm Purchase</button>
+          <button className="purchase-button" onClick={handlePurchase}>Confirm Purchase</button>
         </div>
       )}
     </div>

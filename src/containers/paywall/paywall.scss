@@ -1,5 +1,14 @@
 .paywall {
   text-align: center;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  input, select {
+    border-radius: 4px;
+    padding: 4px;
+  }
 }
 
 .paywall-buttons {
@@ -9,8 +18,9 @@
 }
 
 .paywall-button {
-  padding: 20px;
-  font-size: 1.2em;
+  padding: 16px;
+  font-size: 16px;
+  width: 180px;
   background-color: #f0f0f0;
   border: 2px solid #ddd;
   border-radius: 8px;
@@ -35,3 +45,9 @@
   align-items: center;
   gap: 10px;
 }
+
+.purchase-button {
+  border-radius: 4px;
+  padding: 8px;
+}
+

@@ -41,7 +41,7 @@ const Paywall: React.FC = () => {
           className={`paywall-button ${selectedProduct === Product.Both ? 'active' : ''}`}
           onClick={handleSelectBoth}
         >
-          Both Products Subscription
+          Color + Insider Subscription
         </button>
       </div>
 
