@@ -71,7 +71,7 @@ const usePaywall = () => {
       });
 
       const data = await response.json();
-      alert(`Purchase made for ${data.totalPrice}`);
+      alert(`Purchase made for ${data.totalPrice.toFixed(2)}€`);
     } catch (error) {
       console.error('Error finalizing purchase:', error);
     }
