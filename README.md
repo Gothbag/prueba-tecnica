@@ -21,7 +21,7 @@ and in order to run it, execute while in the main folder:
 npm run dev
 ```
 Within the **server** folder, run:
-
+```
 npm start
 ```
 
