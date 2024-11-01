@@ -1,12 +1,23 @@
 {
   "devDependencies": {
     "@tsconfig/node16": "^16.1.1",
+    "@vitejs/plugin-react": "^4.3.3",
     "dotenv": "^16.3.1",
+    "sass": "^1.80.5",
     "tsc-alias": "^1.8.8",
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^0.34.6"
   },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "react": "^18.3.1"
+  }
 }
