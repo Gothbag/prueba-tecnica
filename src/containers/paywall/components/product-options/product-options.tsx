@@ -26,7 +26,7 @@ const ProductOptions = ({
 
   return (
     <div className="paywall-options">
-      <label>Quantity:</label>
+      <label>Quantity</label>
       <div className="quantity-input">
         <input
           type="number"
@@ -39,7 +39,7 @@ const ProductOptions = ({
         {hasError && <span className="error-message">Quantity must be between 1 and 100.</span>}
       </div>
 
-      <label>Duration:</label>
+      <label>Duration</label>
       <select value={duration} onChange={handleSetDuration}>
         <option value="monthly">Monthly</option>
         <option value="yearly">Yearly</option>
