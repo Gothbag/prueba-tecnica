@@ -23,15 +23,15 @@ class PricingService {
   }
 
   calculateColorPrice(quantity, duration) {
-    if (quantity === 1) {
-      return duration === 'monthly' ? PricingService.COLOR_MONTHLY_PRICE : PricingService.COLOR_YEARLY_PRICE;
+    if (duration === 'monthly') {
+      return PricingService.COLOR_MONTHLY_PRICE;
     }
     return quantity * PricingService.COLOR_YEARLY_PRICE;
   }
 
   calculateInsiderPrice(quantity, duration) {
-    if (quantity === 1) {
-      return duration === 'monthly' ? PricingService.INSIDER_MONTHLY_PRICE : PricingService.INSIDER_YEARLY_PRICE;
+    if (duration === 'monthly') {
+      return PricingService.INSIDER_MONTHLY_PRICE;
     }
     return quantity * PricingService.INSIDER_YEARLY_PRICE;
   }
